@@ -82,12 +82,12 @@ const [activeQR, setActiveQR] = useState(null);
 
         <div className="mx-auto mt-10 max-w-4xl space-y-4">
           {["youtube.com", "facebook.com", "instagram.com", "google.com", "github.com"].map((link, index) => (
-            <div className="flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+            <div key={link} className="flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
               <div>
                 <p className="font-semibold">{link}</p>
                 <p className="text-sm text-gray-500">tiny.site/{["yt", "fb", "ig", "gg", "gh"][index]}</p>
               </div>
-              <p className="text-purple-600">{(index + 1) * 1250} clicks</p>
+              
               <div className="flex items-center gap-3">
   <p className="text-purple-600">
     {(index + 1) * 1250} clicks
@@ -129,7 +129,44 @@ const [activeQR, setActiveQR] = useState(null);
         <p className="mx-auto mt-4 max-w-2xl text-gray-600">
           Everything you need to manage and grow your links.
         </p>
+<div className="mx-auto mt-10 max-w-4xl rounded-2xl bg-white p-6 text-left shadow-lg">
+  <h3 className="text-xl font-bold">Analytics Dashboard</h3>
+  <p className="mt-1 text-sm text-gray-500">
+    Your link performance at a glance
+  </p>
 
+  <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    {[
+      { title: "Total Clicks", value: "24,580" },
+      { title: "Total Links", value: "1,250" },
+      { title: "Countries", value: "180+" },
+    ].map((item) => (
+      <div key={item.title} className="rounded-xl bg-purple-50 p-4">
+        <p className="text-sm text-gray-500">{item.title}</p>
+        <p className="mt-2 text-2xl font-bold">{item.value}</p>
+      </div>
+    ))}
+  </div>
+
+  <div className="mt-6 rounded-xl border p-4">
+    <h4 className="font-semibold">Weekly Clicks</h4>
+    <div className="mt-5 flex h-40 items-end justify-around gap-3">
+      {[45, 70, 55, 90, 65, 100, 75].map((height, index) => (
+        <div key={index} className="flex h-full flex-1 items-end">
+          <div
+            className="w-full rounded-t-md bg-purple-500"
+            style={{ height: `${height}%` }}
+          />
+        </div>
+      ))}
+    </div>
+    <div className="mt-2 flex justify-around text-xs text-gray-500">
+      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+        <span key={day}>{day}</span>
+      ))}
+    </div>
+  </div>
+</div>
         <div className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {["Advanced Analytics", "Custom Short Links", "QR Code Generation", "Link Management", "Click Tracking", "Detailed Reports"].map((feature) => (
             <div key={feature} className="rounded-2xl bg-white p-8 shadow-sm">
